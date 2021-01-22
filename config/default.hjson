@@ -43,7 +43,8 @@ sde_pg_3::vectortile::roads_other_l
 sde_pg_3::vectortile::runways_all_l              
 sde_pg_3::vectortile::water_all_a                
 sde_pg_3::vectortile::waterways_large_l          
-sde_pg_3::vectortile::waterways_small_l          
+sde_pg_3::vectortile::waterways_small_l
+sde_pg_3::vectortile::buildings_a          
   ]
   defaultDate: 2021-01-20
   mbtilesDir: mbtiles/osm_tile

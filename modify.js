@@ -300,7 +300,7 @@ const lut = {
     delete f.properties['ungsc_mission']
     return f
   },
-  osm_planet_buildings: f => {
+  buildings_a: f => {
     f.tippecanoe = {
       layer: 'building',
       minzoom: 12,
