@@ -39,6 +39,7 @@ sde_pg_3::vectortile::railways_all_l
 sde_pg_3::vectortile::roads_all_a
 sde_pg_3::vectortile::roads_special_l                
 sde_pg_3::vectortile::roads_major_l              
+sde_pg_3::vectortile::roads_medium_l    
 sde_pg_3::vectortile::roads_minor_l              
 sde_pg_3::vectortile::roads_other_l              
 sde_pg_3::vectortile::runways_all_l              
