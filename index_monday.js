@@ -312,7 +312,7 @@ const queueTasks = () => {
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
 
 if (skipSea == "yes") { //edited on 0124
-  conversionTileLlist = conversionTilelist.filter(v => !seaTilelist.includes(v)) //edited on 0124
+  conversionTilelist = conversionTilelist.filter(v => !seaTilelist.includes(v)) //edited on 0124
 } //edited on 0124
 
 for (let moduleKey of conversionTilelist) {
