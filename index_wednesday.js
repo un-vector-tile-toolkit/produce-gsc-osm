@@ -28,6 +28,8 @@ const defaultDate = new Date(config.get('defaultDate'))
 const mbtilesDir = config.get('mbtilesDir_wed') //edited 2020-01-22
 const propertyBlacklist = config.get('propertyBlacklist')
 const conversionTilelist = config.get('wednesdayTilelist') //edited 2021-01-22
+const seaTilelist = config.get('seaTilelist')  //edited 2021-01-24
+const skipSea = config.get('skipSea')  //edited 2021-01-24
 const spinnerString = config.get('spinnerString')
 const fetchSize = config.get('fetchSize')
 const tippecanoePath = config.get('tippecanoePath')
@@ -308,6 +310,11 @@ const queue = new Queue(async (t, cb) => {
 const queueTasks = () => {
   let moduleKeys = Object.keys(modules)
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
+
+if (skipSea == "yes") { //edited on 0124
+  conversionTileLlist = conversionTileLlist.filter(v => !seaTilelist.includes(v)) //edited on 0124
+} //edited on 0124
+
 for (let moduleKey of conversionTilelist) {
 //  for (let moduleKey of moduleKeys) {
 //  for (let moduleKey of ['6-34-30','6-34-31','6-34-32','6-35-30','6-35-31','6-35-32','6-36-30','6-36-31','6-36-32','6-37-30','6-37-31','6-37-32','6-38-30','6-38-31','6-38-32']) { //// TEMP

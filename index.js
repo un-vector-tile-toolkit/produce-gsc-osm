@@ -29,6 +29,8 @@ const propertyBlacklist = config.get('propertyBlacklist')
 const spinnerString = config.get('spinnerString')
 const fetchSize = config.get('fetchSize')
 const tippecanoePath = config.get('tippecanoePath')
+const seaTilelist = config.get('seaTilelist')  //edited 2021-01-24
+const skipSea = config.get('skipSea')  //edited 2021-01-24
 
 // global configurations
 Spinner.setDefaultSpinnerString(spinnerString)
@@ -303,6 +305,11 @@ const queue = new Queue(async (t, cb) => {
 
 const queueTasks = () => {
   let moduleKeys = Object.keys(modules)
+
+if (skipSea == "yes") { //edited on 0124
+  moduleKeys = moduleKeys.filter(v => !seaTilelist.includes(v)) //edited on 0124
+} //edited on 0124
+
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
   for (let moduleKey of moduleKeys) {
 //  for (let moduleKey of ['6-34-30','6-34-31','6-34-32','6-35-30','6-35-31','6-35-32','6-36-30','6-36-31','6-36-32','6-37-30','6-37-31','6-37-32','6-38-30','6-38-31','6-38-32']) { //// TEMP

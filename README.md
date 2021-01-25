@@ -26,3 +26,8 @@ node index_everyday.js
 ```console
 node index_XXXday.js
 ```  
+
+## Sea Tiles  
+if you want to skip sea tiles, skipSea in default.hjson should be "yes."  
+(not applicable for index_everyday.js as there are no sea tiles in this area.)
+

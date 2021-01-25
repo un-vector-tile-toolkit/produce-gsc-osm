@@ -308,6 +308,7 @@ const queue = new Queue(async (t, cb) => {
 const queueTasks = () => {
   let moduleKeys = Object.keys(modules)
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
+
 for (let moduleKey of conversionTilelist) {
 //  for (let moduleKey of moduleKeys) {
 //  for (let moduleKey of ['6-34-30','6-34-31','6-34-32','6-35-30','6-35-31','6-35-32','6-36-30','6-36-31','6-36-32','6-37-30','6-37-31','6-37-32','6-38-30','6-38-31','6-38-32']) { //// TEMP
