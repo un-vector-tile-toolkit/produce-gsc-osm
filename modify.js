@@ -114,7 +114,7 @@ const minzoomWater = (f) => {
 
 
 const lut = {
-  // 1. nature
+  // nature
   landuse_naturallarge_a: f => {
     f.tippecanoe = {
       layer: 'nature-l',
@@ -356,55 +356,7 @@ const lut = {
     delete f.properties['type']
     return f
   },
-  // 9. place
-  pois_heritage_p : f => {
-    f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 13,
-    maxzoom: 15
-    }
-    delete f.properties['class']
-  return f
-  },
-  pois_other_p: f => {
-    if (f.properties.fclass == 'station'){
-        f.properties.fclass = 'p_station'
-    }
-    f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 15,
-    maxzoom: 15
-    }
-  return f
-    delete f.properties['class']
-  },
-  pois_public_p: f => {
-    f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 11,
-    maxzoom: 15
-    }
-  delete f.properties['class']
-  return f
-  },
-  pois_services_p: f => {
-    f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 13,
-    maxzoom: 15
-    }
-  delete f.properties['class']
-  return f
-  },
-  pois_traffic_p: f => {
-    f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 13,
-    maxzoom: 15
-    }
-  delete f.properties['class']
-  return f
-  },
+  // 9. pois place
   pois_transport_p: f => {
     f.tippecanoe = {
     layer: 'poi_trans',
@@ -412,27 +364,125 @@ const lut = {
     }
     switch (f.properties.fclass) {
       case 'aerodrome':
-      case 'airfield':
-        f.tippecanoe.minzoom = 7
+         f.tippecanoe.minzoom = 7
         break
-      default:
-        f.tippecanoe.minzoom = 10
+      case 'airfield':
+         f.tippecanoe.minzoom = 10
+        break
+      case 'helipad':
+         f.tippecanoe.minzoom = 10
+        break
+      case 'station':
+         f.tippecanoe.minzoom = 12
+        break
+      case 'bus_station':
+         f.tippecanoe.minzoom = 12
+        break
+      case 'ferry_terminal':
+         f.tippecanoe.minzoom = 12
+        break
+     default:
+        f.tippecanoe.minzoom = 15
     }
   delete f.properties['class']
   return f
   },
-  pois_water_p: f => {
+  pois_transport_ap: f => {
     f.tippecanoe = {
-    layer: 'poi',
-    minzoom: 15,
+      layer: 'poi_trans',
+      maxzoom: 15
+    }
+    switch (f.properties.fclass) {
+      case 'aerodrome':
+         f.tippecanoe.minzoom = 7
+        break
+      case 'airfield':
+         f.tippecanoe.minzoom = 10
+        break
+      case 'helipad':
+         f.tippecanoe.minzoom = 10
+        break
+      case 'station':
+         f.tippecanoe.minzoom = 12
+        break
+      case 'bus_station':
+         f.tippecanoe.minzoom = 12
+        break
+      case 'ferry_terminal':
+         f.tippecanoe.minzoom = 12
+        break
+     default:
+        f.tippecanoe.minzoom = 15
+    }
+    f.properties._source = 't-ap'
+    delete f.properties['class']
+    return f 
+},
+  pois_public_p: f => {
+    f.tippecanoe = {
+    layer: 'poi_public',
+    minzoom: 12,
     maxzoom: 15
     }
   delete f.properties['class']
   return f
   },
+  pois_public_ap: f => {
+    f.tippecanoe = {
+      layer: 'poi_public',
+      minzoom: 12,
+      maxzoom: 15
+    }
+  f.properties._source = 'pu-ap'
+  delete f.properties['class']
+  return f 
+},
+  pois_services_p: f => {
+    f.tippecanoe = {
+    layer: 'poi_services',
+    maxzoom: 15
+    }
+    switch (f.properties.fclass) {
+      case 'college':
+      case 'doctors':
+      case 'hospital':
+      case 'hotel':
+      case 'kindergarten':
+      case 'school':
+      case 'university':
+         f.tippecanoe.minzoom = 13
+        break
+     default:
+        f.tippecanoe.minzoom = 14
+    }
+  delete f.properties['class']
+  return f
+  },
+  pois_services_ap: f => {
+    f.tippecanoe = {
+      layer: 'poi_services',
+      maxzoom: 15
+    }
+    switch (f.properties.fclass) {
+      case 'college':
+      case 'doctors':
+      case 'hospital':
+      case 'hotel':
+      case 'kindergarten':
+      case 'school':
+      case 'university':
+         f.tippecanoe.minzoom = 13
+        break
+     default:
+        f.tippecanoe.minzoom = 14
+    }
+  f.properties._source = 'se-ap'
+  delete f.properties['class']
+  return f 
+},
   pois_worship_p: f => {
     f.tippecanoe = {
-    layer: 'poi',
+    layer: 'poi_worship',
     minzoom: 13,
     maxzoom: 15
     }
@@ -441,13 +491,69 @@ const lut = {
   },
   pois_worship_ap: f => {
     f.tippecanoe = {
-      layer: 'worship',
+      layer: 'poi_worship',
       minzoom: 13,
       maxzoom: 15
     }
    delete f.properties['class']
     return f
  },
+  pois_heritage_p : f => {
+    f.tippecanoe = {
+    layer: 'poi_heritage',
+    minzoom: 15,
+    maxzoom: 15
+    }
+    delete f.properties['class']
+  return f
+  },
+  pois_heritage_ap: f => {
+    f.tippecanoe = {
+      layer: 'poi_heritage',
+      minzoom: 15,
+      maxzoom: 15
+    }
+    delete f.properties['class']
+    return f 
+},
+  pois_other_p: f => {
+    if (f.properties.fclass == 'station'){
+        f.properties.fclass = 'p_station'
+    }
+    f.tippecanoe = {
+    layer: 'poi_other',
+    minzoom: 15,
+    maxzoom: 15
+    }
+  return f
+    delete f.properties['class']
+  },
+  pois_other_ap: f => {
+    f.tippecanoe = {
+      layer: 'poi_other',
+      minzoom: 15,
+      maxzoom: 15
+    }
+    return f 
+},
+  pois_traffic_p: f => {
+    f.tippecanoe = {
+    layer: 'poi_traffic',
+    minzoom: 14,
+    maxzoom: 15
+    }
+  delete f.properties['class']
+  return f
+  },
+  pois_water_p: f => {
+    f.tippecanoe = {
+    layer: 'poi_water',
+    minzoom: 15,
+    maxzoom: 15
+    }
+  delete f.properties['class']
+  return f
+  },
   barriers_all_l: f => {
     f.tippecanoe = {
       layer: 'barrier',
@@ -457,15 +563,6 @@ const lut = {
     delete f.properties['class']
     return f
  },
-  pois_heritage_ap: f => {
-    f.tippecanoe = {
-      layer: 'heritage',
-      minzoom: 13,
-      maxzoom: 15
-    }
-    delete f.properties['class']
-    return f 
-},
   landuse_parkreserve_a: f => {
     f.tippecanoe = {
       layer: 'area_park',
@@ -479,14 +576,6 @@ const lut = {
     f.tippecanoe = {
       layer: 'lu_pt',
       minzoom: 10,
-      maxzoom: 15
-    }
-    return f 
-},
-  pois_other_ap: f => {
-    f.tippecanoe = {
-      layer: 'otherarea',
-      minzoom: 15,
       maxzoom: 15
     }
     return f 
@@ -506,39 +595,7 @@ const lut = {
       maxzoom: 15
     }
     return f 
-},
-  pois_public_ap: f => {
-    f.tippecanoe = {
-      layer: 'public',
-      minzoom: 11,
-      maxzoom: 15
-    }
-    return f 
-},
-  pois_transport_ap: f => {
-    f.tippecanoe = {
-      layer: 'poi_trans',
-      maxzoom: 15
-    }
-    switch (f.properties.fclass) {
-      case 'aerodrome':
-      case 'airport':
-        f.tippecanoe.minzoom = 7
-        break
-      default:
-        f.tippecanoe.minzoom = 10
-    }
-    f.properties._source = 't-ap'
-    return f 
-},
-  pois_services_ap: f => {
-    f.tippecanoe = {
-      layer: 'serviceap',
-      minzoom: 13,
-      maxzoom: 15
-    }
-    return f 
-},
+  },
   pois_services_a: f => {
     f.tippecanoe = {
       layer: 'service_a',
