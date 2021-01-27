@@ -49,6 +49,7 @@ sde_pg_3::vectortile::waterways_small_l
 sde_pg_3::vectortile::buildings_a          
   ]
   defaultDate: 2021-01-20
+  logDir: log
   mbtilesDir: mbtiles/osm_tile
   mbtilesDir_every: mbtiles/osm_tile_every
   mbtilesDir_mon: mbtiles/osm_tile_mon

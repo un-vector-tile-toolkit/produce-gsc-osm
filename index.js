@@ -25,6 +25,7 @@ const dbPassword = config.get('dbPassword')
 const relations = config.get('relations')
 const defaultDate = new Date(config.get('defaultDate'))
 const mbtilesDir = config.get('mbtilesDir')
+const logDir = config.get('logDir')
 const propertyBlacklist = config.get('propertyBlacklist')
 const spinnerString = config.get('spinnerString')
 const fetchSize = config.get('fetchSize')
@@ -39,7 +40,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: '15-produce-osm-%DATE%.log',
+      filename: `${logDir}/produce-gsc-osm-%DATE%.log`,
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'

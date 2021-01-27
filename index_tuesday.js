@@ -26,6 +26,7 @@ const relations = config.get('relations')
 const defaultDate = new Date(config.get('defaultDate'))
 //const mbtilesDir = config.get('mbtilesDir') 
 const mbtilesDir = config.get('mbtilesDir_tue') //edited 2020-01-22
+const logDir = config.get('logDir')
 const propertyBlacklist = config.get('propertyBlacklist')
 let conversionTilelist = config.get('tuesdayTilelist') //edited 2021-01-22
 const seaTilelist = config.get('seaTilelist')  //edited 2021-01-24
@@ -41,7 +42,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: '18-produce-osm-%DATE%.log',
+      filename: `${logDir}/produce-tuesday-%DATE%.log`,
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'
