@@ -410,12 +410,13 @@ const lut = {
     layer: 'poi_trans',
     maxzoom: 15
     }
-    switch (f.properties.z_order) {
-      case 5:
+    switch (f.properties.fclass) {
+      case 'aerodrome':
+      case 'airfield':
         f.tippecanoe.minzoom = 7
         break
       default:
-        f.tippecanoe.minzoom = 9
+        f.tippecanoe.minzoom = 10
     }
   delete f.properties['class']
   return f
@@ -516,16 +517,18 @@ const lut = {
 },
   pois_transport_ap: f => {
     f.tippecanoe = {
-      layer: 'transareap',
+      layer: 'poi_trans',
       maxzoom: 15
     }
-    switch (f.properties.z_order) {
-      case 4:
+    switch (f.properties.fclass) {
+      case 'aerodrome':
+      case 'airport':
         f.tippecanoe.minzoom = 7
         break
       default:
-        f.tippecanoe.minzoom = 9
+        f.tippecanoe.minzoom = 10
     }
+    f.properties._source = 't-ap'
     return f 
 },
   pois_services_ap: f => {
