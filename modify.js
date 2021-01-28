@@ -79,11 +79,10 @@ const minzoomRoad = (f) => {
       return 8
     case 'primary':
     case 'trunk_link':
-      return 8
-    case 'trunk':
     case 'motorway_link':
-      return 8
+      return 7
     case 'motorway':
+    case 'trunk':
       return 6
     default:
       return 15
