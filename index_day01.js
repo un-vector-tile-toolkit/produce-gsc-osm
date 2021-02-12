@@ -25,10 +25,12 @@ const dbPassword = config.get('dbPassword')
 const relations = config.get('relations')
 const defaultDate = new Date(config.get('defaultDate'))
 //const mbtilesDir = config.get('mbtilesDir') 
-const mbtilesDir = config.get('mbtilesDir_every') //edited 2020-01-22
+const mbtilesDir = config.get('mbtilesDir_day01') //edited 2020-02-12
 const logDir = config.get('logDir')
 const propertyBlacklist = config.get('propertyBlacklist')
-const conversionTilelist = config.get('everydayTilelist') //edited 2021-01-22
+let conversionTilelist = config.get('day01Tilelist') //edited 2021-02-12
+const seaTilelist = config.get('seaTilelist')  //edited 2021-01-24
+const skipSea = config.get('skipSea')  //edited 2021-01-24
 const spinnerString = config.get('spinnerString')
 const fetchSize = config.get('fetchSize')
 const tippecanoePath = config.get('tippecanoePath')
@@ -40,7 +42,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: `${logDir}/produce-everyday-%DATE%.log`,
+      filename: `${logDir}/produce-day01-%DATE%.log`,
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'
@@ -301,7 +303,7 @@ const queue = new Queue(async (t, cb) => {
   }
   tippecanoe.stdin.end()
 }, { 
-  concurrent: config.get('concurrentE'), 
+  concurrent: config.get('concurrent'), 
   maxRetries: config.get('maxRetries'),
   retryDelay: config.get('retryDelay') 
 })
@@ -309,6 +311,10 @@ const queue = new Queue(async (t, cb) => {
 const queueTasks = () => {
   let moduleKeys = Object.keys(modules)
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
+
+if (skipSea == "yes") { //edited on 0124
+  conversionTilelist = conversionTilelist.filter(v => !seaTilelist.includes(v)) //edited on 0124
+} //edited on 0124
 
 for (let moduleKey of conversionTilelist) {
 //  for (let moduleKey of moduleKeys) {
@@ -330,7 +336,7 @@ const shutdown = () => {
 }
 
 const main = async () => {
-  winston.info(`${iso()}: Everyday tile production started.`)
+  winston.info(`${iso()}: day01 tile production started.`)
   await getScores()
   queueTasks()
   queue.on('drain', () => {

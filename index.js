@@ -326,6 +326,7 @@ if (skipSea == "yes") { //edited on 0124
 const shutdown = () => {
   winston.info(`${iso()}: production system shutdown.`)
   console.log('** production system shutdown! **')
+  process.exit(0)
 //  sar.kill()
 }
 
