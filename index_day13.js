@@ -25,10 +25,10 @@ const dbPassword = config.get('dbPassword')
 const relations = config.get('relations')
 const defaultDate = new Date(config.get('defaultDate'))
 //const mbtilesDir = config.get('mbtilesDir') 
-const mbtilesDir = config.get('mbtilesDir_fri') //edited 2020-01-22
+const mbtilesDir = config.get('mbtilesDir_day13') //edited 2020-02-12
 const logDir = config.get('logDir')
 const propertyBlacklist = config.get('propertyBlacklist')
-let conversionTilelist = config.get('fridayTilelist') //edited 2021-01-22
+let conversionTilelist = config.get('day13Tilelist') //edited 2021-02-12
 const seaTilelist = config.get('seaTilelist')  //edited 2021-01-24
 const skipSea = config.get('skipSea')  //edited 2021-01-24
 const spinnerString = config.get('spinnerString')
@@ -42,7 +42,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: `${logDir}/produce-friday-%DATE%.log`,
+      filename: `${logDir}/produce-day13-%DATE%.log`,
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'
@@ -331,11 +331,12 @@ for (let moduleKey of conversionTilelist) {
 const shutdown = () => {
   winston.info(`${iso()}: production system shutdown.`)
   console.log('** production system shutdown! **')
+  process.exit(0)
 //  sar.kill()
 }
 
 const main = async () => {
-  winston.info(`${iso()}: Friday tile production started.`)
+  winston.info(`${iso()}: day13 tile production started.`)
   await getScores()
   queueTasks()
   queue.on('drain', () => {
