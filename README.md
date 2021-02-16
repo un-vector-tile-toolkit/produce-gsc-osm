@@ -31,3 +31,13 @@ node index_XXXday.js
 if you want to skip sea tiles, skipSea in default.hjson should be "yes."  
 (not applicable for index_everyday.js as there are no sea tiles in this area.)
 
+
+## Update as scheduled task  
+It woudl be a good idea to use crontab.  
+You may need to use ssh-key if you want to upload the tile to an independent hosting server.  
+```console
+crontab -e  
+
+(edit the crontab as you like)  
+mm hh * * * cd /home/xxxx/produce-gsc-osm; ./work_every.sh
+``` 
